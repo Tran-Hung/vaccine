@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/public")
 public class VaccineController {
     @Autowired
     protected ProviderService providerService;
@@ -33,6 +33,11 @@ public class VaccineController {
 
     @Autowired
     protected InvoiceService invoiceService;
+
+    @GetMapping("/hello")
+    public String getHello() {
+        return "Hello";
+    }
 
     @GetMapping("/vaccines")
     public ResponseEntity<List<VaccineDTO>> getAllVaccine(@RequestParam int index) {
