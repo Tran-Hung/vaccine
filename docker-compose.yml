@@ -15,7 +15,7 @@ services:
     build: .
     restart: on-failure
     ports:
-      - 8888:8080
+      - 8888:8181
     environment:
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/vaccine_management",
