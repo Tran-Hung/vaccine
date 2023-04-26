@@ -2,6 +2,7 @@ package com.example.VaccineManagement.service;
 
 import com.example.VaccineManagement.dto.CreateVaccineDTO;
 import com.example.VaccineManagement.dto.VaccineDTO;
+import com.example.VaccineManagement.bean.VaccineOrmBean;
 import com.example.VaccineManagement.entity.Vaccine;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,8 @@ public interface VaccineService {
     VaccineDTO getVaccineById(Integer id);
 
     List<VaccineDTO> getAllVaccineDTO(int index);
+
+    List<VaccineOrmBean> getListVaccine(int index);
 
     List<VaccineDTO> getAllVaccineDTONotPagination();
 

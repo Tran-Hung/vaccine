@@ -1,11 +1,12 @@
 package com.example.VaccineManagement.service.impl;
 
-import com.example.VaccineManagement.common.SecureRandomUtil;
 import com.example.VaccineManagement.dto.CreateVaccineDTO;
 import com.example.VaccineManagement.dto.VaccineDTO;
+import com.example.VaccineManagement.bean.VaccineOrmBean;
 import com.example.VaccineManagement.entity.Vaccine;
 import com.example.VaccineManagement.repository.VaccineRepository;
 import com.example.VaccineManagement.service.VaccineService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class VaccineServiceImpl implements VaccineService {
 
     @Autowired
@@ -53,6 +55,12 @@ public class VaccineServiceImpl implements VaccineService {
     @Override
     public List<VaccineDTO> getAllVaccineDTO(int index) {
         return vaccineRepository.getAllVaccineDTO(index);
+    }
+
+    @Override
+    public List<VaccineOrmBean> getListVaccine(int index) {
+        List<VaccineOrmBean> vaccineOrmBeanList = vaccineRepository.getListVaccine(index);
+        return vaccineOrmBeanList;
     }
 
     @Override

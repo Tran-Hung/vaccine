@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+
+    <named-native-query name="getListVaccine">
+        <query><![CDATA[
+            select vaccine.vaccine_id as id,vaccine.name as name, vaccine_type.name as vaccineType,invoice.transaction_date as dayReceive,
+                    vaccine.license_code as licenseCode, vaccine.origin as origin, vaccine.dosage as dosage,
+                    vaccine.expired as expired, vaccine.maintenance as maintenance, vaccine.age as age, storage.quantity as quantity, vaccine.times as times, vaccine.duration as duration
+            from vaccine
+                left join vaccine_type on vaccine.vaccine_type = vaccine_type.vaccine_type_id
+                left join storage on storage.vaccine_id = vaccine.vaccine_id
+                left join invoice on invoice.vaccine_id = vaccine.vaccine_id
+            where vaccine.delete_flag = 0
+            group by vaccine.vaccine_id limit :index,5
+            ]]>
+        </query>
+    </named-native-query>
+
+
+    <sql-result-set-mapping name="VaccineMapping">
+        <constructor-result target-class="com.example.VaccineManagement.bean.VaccineOrmBean">
+            <column name="id"/>
+            <column name="name"/>
+            <column name="vaccineType"/>
+            <column name="dayReceive"/>
+            <column name="licenseCode"/>
+            <column name="origin"/>
+            <column name="dosage" class="java.lang.Double"/>
+            <column name="expired" class="java.util.Date"/>
+            <column name="maintenance"/>
+            <column name="age"/>
+            <column name="quantity" class="java.lang.Long"/>
+            <column name="times" class="java.lang.Long"/>
+            <column name="duration" class="java.lang.Long"/>
+        </constructor-result>
+    </sql-result-set-mapping>
+</entity-mappings>

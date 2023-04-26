@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
+public interface VaccineRepository extends JpaRepository<Vaccine, Long>,VaccineRepositoryCustom {
 
     Vaccine findByName(String name);
 
@@ -21,7 +21,7 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
             "left join storage on storage.vaccine_id = vaccine.vaccine_id " +
             "left join invoice on invoice.vaccine_id = vaccine.vaccine_id " +
             "where vaccine.delete_flag = 0 " +
-            "group by vaccine.vaccine_id limit ?1,5;", nativeQuery = true)
+            "group by vaccine.vaccine_id limit ?1,5", nativeQuery = true)
     List<VaccineDTO> getAllVaccineDTO(int index);
 
     @Query(value = "SELECT vaccine.vaccine_id as id,vaccine.name as name, vaccine_type.name as vaccineType,invoice.transaction_date as dayReceive, " +

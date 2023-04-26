@@ -1,5 +1,6 @@
 package com.example.VaccineManagement.controller;
 
+import com.example.VaccineManagement.bean.VaccineOrmBean;
 import com.example.VaccineManagement.service.*;
 import com.example.VaccineManagement.dto.CreateVaccineDTO;
 import com.example.VaccineManagement.dto.VaccineDTO;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -46,6 +46,15 @@ public class VaccineController {
             return new ResponseEntity<List<VaccineDTO>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<VaccineDTO>>(vaccines, HttpStatus.OK);
+    }
+
+    @GetMapping("/list-vaccines")
+    public ResponseEntity<List<VaccineOrmBean>> getListVaccine(@RequestParam int index) {
+        List<VaccineOrmBean> vaccines = vaccineService.getListVaccine(index);
+        if (vaccines.isEmpty()) {
+            return new ResponseEntity<List<VaccineOrmBean>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<VaccineOrmBean>>(vaccines, HttpStatus.OK);
     }
 
     @GetMapping("/vaccines-not-pagination")
